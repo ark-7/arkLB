@@ -1,6 +1,6 @@
 # TARGET = xdp_lb
 # TARGET = packetdrop
-TARGET = xdp_liz
+TARGET = xdp_buzz
 
 # For xdp_liz, make and also make user. The others don't have userspace programs
 
@@ -12,7 +12,7 @@ BPF_OBJ = ${BPF_C:.c=.o}
 xdp: $(BPF_OBJ)
 	bpftool net detach xdpgeneric dev wlo1
 	rm -f /sys/fs/bpf/$(TARGET)
-	bpftool prog load $(BPF_OBJ) /sys/fs/bpf/$(TARGET)
+	bpftool prog load $(BPF_OBJ) /sys/fs/bpf/$(TARGET) --legacy
 	bpftool net attach xdpgeneric pinned /sys/fs/bpf/$(TARGET) dev wlo1
 
 user: $(USER_TARGET)
@@ -36,11 +36,8 @@ $(BPF_OBJ): %.o: %.c
 	llc -march=bpf -filetype=obj -o $@ ${@:.o=.ll}
 
 clean:
-	bpftool net detach xdpgeneric dev eth0
+	bpftool net detach xdpgeneric dev wlo1
 	rm -f /sys/fs/bpf/$(TARGET)
 	rm $(BPF_OBJ)
 	rm ${BPF_OBJ:.o=.ll}
-
-
-
 

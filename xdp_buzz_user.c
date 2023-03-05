@@ -4,7 +4,7 @@
 #include <time.h>
 #include <signal.h>
 #include <libbpf.h>
-#include "xdp_liz.h"
+#include "xdp_buzz.h"
 
 static __u64 time_get_ns(void)
 {
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     int map_fd, ret = 0;
     FILE *f;
 
-    obj = bpf_object__open_file("xdp_liz_kern.o", NULL);
+    obj = bpf_object__open_file("xdp_buzz_kern.o", NULL);
     if (libbpf_get_error(obj))
     {
         fprintf(stderr, "ERROR: opening BPF object file failed\n");
@@ -56,8 +56,8 @@ int main(int argc, char **argv)
         goto cleanup;
     }
 
-    pb_opts.sample_cb = print_bpf_output;
-    pb = perf_buffer__new(map_fd, 8, &pb_opts);
+    //pb_opts.sample_period = print_bpf_output;
+    pb = perf_buffer__new(map_fd, 8, print_bpf_output, NULL, NULL, &pb_opts);
     ret = libbpf_get_error(pb);
     if (ret)
     {

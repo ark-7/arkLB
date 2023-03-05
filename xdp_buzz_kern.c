@@ -1,17 +1,17 @@
 #include "xdp_kern.h"
-#include "xdp_liz.h"
+#include "xdp_buzz.h"
 
 #define IP_ADDRESS(x) (unsigned int)(172 + (17 << 8) + (0 << 16) + (x << 24))
 
 struct {
     __uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);
-    __uint(max_entries, 128);
+    __uint(max_entries, 16);
     __type(key, int);
-    __type(value, __u32);
+    __type(value, int);
 } my_map SEC(".maps");
 
-SEC("xdp_liz")
-int xdp_liz_hello(struct xdp_md *ctx)
+SEC("xdp_buzz")
+int xdp_buzz_hello(struct xdp_md *ctx)
 {
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
