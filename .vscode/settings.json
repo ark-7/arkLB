@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "bpf_endian.h": "c",
+        "xdp_kern.h": "c",
+        "xdp_liz.h": "c"
+    }
+}
