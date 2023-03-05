@@ -16,7 +16,7 @@ int xdp_buzz_hello(struct xdp_md *ctx)
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    bpf_printk("Hey it's liz");
+    bpf_printk("Hey there, I'm a XDP program!");
 
     struct S trace;
     int ret;
