@@ -1,13 +1,15 @@
 #include "xdp_kern.h"
 #include "xdp_buzz.h"
+#include "../libbpf/src/bpf_endian.h"
+#include "../libbpf/src/bpf_helpers.h"
 
 #define IP_ADDRESS(x) (unsigned int)(172 + (17 << 8) + (0 << 16) + (x << 24))
 
 struct {
     __uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);
-    __uint(max_entries, 16);
-    __type(key, int);
-    __type(value, int);
+    __uint(max_entries, 1);
+    __type(key, __u32);
+    __type(value, __u32);
 } my_map SEC(".maps");
 
 SEC("xdp_buzz")

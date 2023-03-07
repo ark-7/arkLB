@@ -3,7 +3,7 @@
 #include <poll.h>
 #include <time.h>
 #include <signal.h>
-#include <libbpf.h>
+#include "../libbpf/src/libbpf.h"
 #include "xdp_buzz.h"
 
 static __u64 time_get_ns(void)

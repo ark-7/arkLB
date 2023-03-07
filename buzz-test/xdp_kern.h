@@ -3,8 +3,8 @@
 #include <linux/in.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
-#include "libbpf/src/bpf_helpers.h"
-#include "libbpf/src/bpf_endian.h"
+#include "../libbpf/src/bpf_helpers.h"
+#include "../libbpf/src/bpf_endian.h"
 
 static __always_inline __u16
 csum_fold_helper(__u64 csum)
