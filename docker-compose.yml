@@ -1,7 +1,6 @@
 services:
-  app: 
-    image: ubuntu:latest
-    command: sh -c "sudo ./xdp_buzz_user"
+  buzzlb: 
+    image: buzzlb:latest
     working_dir: /app
 
   nginx-backend-1:
@@ -9,3 +8,7 @@ services:
     
   nginx-backend-2:
     image: nginxdemos/hello:plain-text
+
+  nginx-backend-3:
+    image: nginxdemos/hello:plain-text
+    

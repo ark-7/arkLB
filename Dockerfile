@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 WORKDIR /app
 COPY . .
-RUN sh script.sh
-EXPOSE 3000
+RUN apt update -q 
+RUN apt install -y clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
+ENTRYPOINT ["tail", "-f", "/dev/null"]

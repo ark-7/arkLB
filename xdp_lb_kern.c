@@ -4,8 +4,9 @@
 
 #define BACKEND_A 2
 #define BACKEND_B 3
-#define CLIENT 4
-#define LB 5
+#define BACKEND_C 4
+#define CLIENT 5
+#define LB 6
 
 SEC("xdp_lb")
 int xdp_load_balancer(struct xdp_md *ctx)
@@ -13,7 +14,7 @@ int xdp_load_balancer(struct xdp_md *ctx)
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    bpf_printk("got something");
+    bpf_printk("got a packet! Standby...");
 
     struct ethhdr *eth = data;
     if (data + sizeof(struct ethhdr) > data_end)
@@ -36,17 +37,20 @@ int xdp_load_balancer(struct xdp_md *ctx)
         char be = BACKEND_A;
         if (bpf_ktime_get_ns() % 2)
             be = BACKEND_B;
+        else if (bpf_ktime_get_ns() % 4)
+            be = BACKEND_C;
 
         iph->daddr = IP_ADDRESS(be);
-        eth->h_dest[5] = be;
+        eth->h_dest[6] = be;
     }
     else
     {
         iph->daddr = IP_ADDRESS(CLIENT);
-        eth->h_dest[5] = CLIENT;
+        eth->h_dest[6] = CLIENT;
     }
+    
     iph->saddr = IP_ADDRESS(LB);
-    eth->h_source[5] = LB;
+    eth->h_source[6] = LB;
 
     iph->check = iph_csum(iph);
 

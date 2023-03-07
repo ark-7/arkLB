@@ -1,6 +1,11 @@
 # buzzLB
 
-A linux network load balancer made using eBPF and XDP
+An L4 network load balancer based on eBPF and XDP
+
+ __WARNING: Project not complete yet__
+
+[![Docker](https://img.shields.io/badge/docker%20image-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/aerox86/buzzlb)
+
 
 ## Terms
 
@@ -37,6 +42,13 @@ After compiling, run the `xdp_buzz_user` with `sudo` privileges
 
 _WARNING: Project not fully tested yet_
 
+## Docker
+
+If you have Docker installed in your system, you can workaround the project using the command
+
+```bash
+docker compose up
+```
 
 ## Tools used
 
