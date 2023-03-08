@@ -59,4 +59,3 @@ install:
 	bpftool prog load buzz_lb_kern.o /sys/fs/bpf/buzz_lb --legacy		
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o main buzz_lb_main.c -l:libbpf.a -lelf -lz	
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o udp_main udp_lb_user.c -l:libbpf.a -lelf -lz	
-

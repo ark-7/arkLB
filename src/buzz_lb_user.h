@@ -147,7 +147,7 @@ int buzz_attach_ebpf_to_socket(int socketfd, uint32_t key, uint32_t balancer_cou
     return 1;
   }
 
-  printf("UDP sockfd: %lld\n", usock);
+  printf("UDP sockfd: %ld\n", usock);
   if (bpf_map_update_elem(umap_fd, &key, &usock, BPF_ANY) != 0) {
     perror("Could not update reuseport array");
     return 1;
@@ -159,7 +159,7 @@ int buzz_attach_ebpf_to_socket(int socketfd, uint32_t key, uint32_t balancer_cou
   assert(size_map);
   size_map_fd = bpf_map__fd(size_map);
   assert(size_map_fd);
-
+  // To be updated here...
   uint32_t index = 0;
   if (balancer_count == 0) {  // no user-supplied limit
     bpf_map_lookup_elem(size_map_fd, &index, &balancer_count);
