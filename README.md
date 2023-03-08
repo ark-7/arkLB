@@ -32,11 +32,13 @@ sudo apt install linux-tools-generic linux-cloud-tools-generic
 Then run the commands in `sudo` mode
 
 ```bash
-make 
-make user
+./bootstrap
+./configure
+make
+make install (after cd src)
 ```
 
-After compiling, run the `xdp_buzz_user` with `sudo` privileges
+After compiling, run the `./main` with `sudo` privileges
 
 **NOTE: Change your network interface in `Makefile` else the program may not work properly**
 
@@ -58,6 +60,7 @@ _NOTE: This may update from time to time_
 - libbpf
 - clang
 - llvm
+- Python
 
 ## License
 
