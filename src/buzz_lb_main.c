@@ -18,6 +18,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <arpa/inet.h>
+#include <time.h>
+#include <signal.h>
 #include <sys/socket.h>
 #include <linux/bpf.h>
 #include "buzz_lb_user.h"
@@ -28,17 +30,80 @@
 #define SK_BUFFER 20971520 // 20MB of socket buffer size
 #define UDP_MAX_SIZE 65535
 
+static __u64 time_get_ns(void)
+{
+    struct timespec ts;
+
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000000000ull + ts.tv_nsec;
+}
+
+static __u64 start_time;
+static __u64 cnt;
+
+#define MAX_CNT 100000ll
+
+static void print_bpf_output(void *ctx, int cpu, void *data, __u32 size)
+{
+    struct S *trace = data;
+
+    printf("%lld\n", trace->time);
+}
+
 int main(int argc, char *argv[])
 {
-  if (argc != 5)
-  {
-    printf("Error: arguments not valid\n");
-    printf("Usage: ./main <ip> <port> <index> <loadbalance_max>\n");
-    printf("Example: ./main 10.0.2.15 10001 0 5\n");
-    exit(1);
-  }
+  if(argc == 2) {
+    printf("Using XDP mode...\n");
+    struct perf_buffer_opts pb_opts = {};
+    struct bpf_link *link = NULL;
+    struct perf_buffer *pb;
+    struct bpf_object *obj;
+    int map_fd, ret = 0;
+    FILE *f;
 
-  printf("Listening on %s:%s\n", argv[1], argv[2]);
+    obj = bpf_object__open_file("buzz_lb_kern.o", NULL);
+    if (libbpf_get_error(obj)) {
+      printf("Failed to open object file\n");
+      exit(1);
+    }
+
+    int err = bpf_object__load(obj);
+    if (err) {
+      printf("Failed to load object file\n");
+      exit(1);
+    }
+
+    int map_f = bpf_object__find_map_fd_by_name(obj, "perf_map");
+    if(map_f < 0) {
+      printf("Failed to pin map\n");
+      exit(1);
+    }
+
+    pb_opts.sample_period = print_bpf_output;
+    pb = perf_buffer__new(map_f, 8, NULL, NULL, NULL, &pb_opts);
+    ret = libbpf_get_error(pb);
+    if (ret)
+    {
+        printf("failed to setup perf_buffer: %d\n", ret);
+        return 1;
+    }
+
+    f = popen("taskset 1 dd if=/dev/zero of=/dev/null", "r");
+    (void)f;
+
+    start_time = time_get_ns();
+    while ((ret = perf_buffer__poll(pb, 1000)) >= 0 && cnt < MAX_CNT)
+    {
+    }
+    kill(0, SIGINT);
+
+    cleanup:
+    bpf_link__destroy(link);
+    bpf_object__close(obj);
+    return ret;
+  }
+  else if(argc == 5) {
+    printf("Listening on %s:%s\n", argv[1], argv[2]);
 
   // Create a udp socket with default socket buffer
   int socketfd = buzz_create_udp_bound_socket(argv[1], argv[2], SK_BUFFER);
@@ -79,6 +144,14 @@ int main(int argc, char *argv[])
     printf("Buffer: %.*s\n", (int)nread, buf);
     printf("**** End Message ****\n\n");
   }
-
+  return 0;
+  }
+  else {
+    printf("Error: arguments not valid\n");
+    printf("Usage: ./main <ip> <port> <index> <loadbalance_max>\n");
+    printf("Example: ./main 10.0.2.15 10001 0 5\n");
+    printf("%d\n", argc);
+    exit(1);
+  }
   return 0;
 }

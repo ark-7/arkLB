@@ -18,6 +18,11 @@
 #define MAX_BALANCER_COUNT 128
 #endif
 
+struct S
+{
+    unsigned long long time;
+};
+
 int buzz_create_udp_bound_socket(char *address, char *port, uint64_t buffer_size)
 {
   assert(address != NULL);

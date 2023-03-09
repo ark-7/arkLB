@@ -2,10 +2,10 @@
  * Publisher of udp packets to test main.c
  * This code allows sending "Hello World !" messages to a connected IP/port.
  * 
- * Usage: ./udp_publisher <ip> <port> <nb_message_to_send>
+ * Usage: ./udp_main <ip> <port> <nb_message_to_send>
  * 
- * Example for sending 10 message:        ./udp_publisher 10.0.2.15 10001 10
- * Example for sending infinite messages: ./udp_publisher 10.0.2.15 10001 0
+ * Example for sending 10 message:        ./udp_main 10.0.2.15 10001 10
+ * Example for sending infinite messages: ./udp_main 10.0.2.15 10001 0
  */
 
 #include <stdlib.h>
@@ -72,8 +72,8 @@ int main(int argc, char *argv[])
   if (argc != 4)
   {
     printf("Error: arguments not valid\n");
-    printf("Usage: ./udp_publisher <ip> <port> <nb_messages>\n");
-    printf("Example: ./udp_publisher 10.0.2.15 10001 10\n");
+    printf("Usage: ./udp_main <ip> <port> <nb_messages>\n");
+    printf("Example: ./udp_main 10.0.2.15 10001 10\n");
     exit(1);
   }
 

@@ -55,7 +55,11 @@ install:
 	    -Werror \
 	    -O2 -emit-llvm -c -o buzz_lb_kern.ll buzz_lb_kern.c
 	llc -march=bpf -filetype=obj -o buzz_lb_kern.o buzz_lb_kern.ll	
-	rm -f /sys/fs/bpf/buzz_lb	
-	bpftool prog load buzz_lb_kern.o /sys/fs/bpf/buzz_lb --legacy		
+	rm -f /sys/fs/bpf/xdp_buzz_lb	
+	echo "Setting up veth interface..."
+	ip link add type veth
+	bpftool net detach xdpgeneric dev veth1
+	bpftool prog load buzz_lb_kern.o /sys/fs/bpf/xdp_buzz_lb --legacy
+	bpftool net attach xdpgeneric pinned /sys/fs/bpf/xdp_buzz_lb dev veth1		
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o main buzz_lb_main.c -l:libbpf.a -lelf -lz	
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o udp_main udp_lb_user.c -l:libbpf.a -lelf -lz	
