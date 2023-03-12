@@ -73,29 +73,25 @@ int main(int argc, char *argv[])
       exit(1);
     }
 
-    int map_f = bpf_object__find_map_fd_by_name(obj, "perf_map");
-    if(map_f < 0) {
-      printf("Failed to pin map\n");
+    struct bpf_program *prog = bpf_object__find_program_by_name(obj, "buzz_lb_xdp");
+    if(!prog) {
+      printf("Failed to pin program\n");
       exit(1);
     }
 
-    pb_opts.sample_period = print_bpf_output;
-    pb = perf_buffer__new(map_f, 8, NULL, NULL, NULL, &pb_opts);
-    ret = libbpf_get_error(pb);
-    if (ret)
-    {
-        printf("failed to setup perf_buffer: %d\n", ret);
-        return 1;
+    int prog_fd = bpf_program__fd(prog);
+    assert(prog_fd);
+    // Run BPF program
+    link = bpf_program__attach_xdp(prog, 1);
+    if (libbpf_get_error(link)) {
+      printf("Failed to attach program\n");
+      exit(1);
     }
-
     f = popen("taskset 1 dd if=/dev/zero of=/dev/null", "r");
     (void)f;
 
     start_time = time_get_ns();
-    while ((ret = perf_buffer__poll(pb, 1000)) >= 0 && cnt < MAX_CNT)
-    {
-    }
-    kill(0, SIGINT);
+
 
     cleanup:
     bpf_link__destroy(link);

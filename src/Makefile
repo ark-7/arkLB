@@ -55,11 +55,20 @@ install:
 	    -Werror \
 	    -O2 -emit-llvm -c -o buzz_lb_kern.ll buzz_lb_kern.c
 	llc -march=bpf -filetype=obj -o buzz_lb_kern.o buzz_lb_kern.ll	
-	rm -f /sys/fs/bpf/xdp_buzz_lb	
-	echo "Setting up veth interface..."
+	clang -O2 -g -Wall -target bpf -c -emit-llvm xdp_kern.c -o xdp_kern.ll
+	llc -march=bpf -filetype=obj -o xdp_kern.o xdp_kern.ll
+	rm -f /sys/fs/bpf/xdp_lb	
+	echo "Setting up veth interface...Change interface in Makefile if you need"
 	ip link add type veth
-	bpftool net detach xdpgeneric dev veth1
-	bpftool prog load buzz_lb_kern.o /sys/fs/bpf/xdp_buzz_lb --legacy
-	bpftool net attach xdpgeneric pinned /sys/fs/bpf/xdp_buzz_lb dev veth1		
+	bpftool net detach xdpgeneric dev wlo1
+	bpftool prog load xdp_kern.o /sys/fs/bpf/xdp_lb --legacy
+	bpftool net attach xdpgeneric pinned /sys/fs/bpf/xdp_lb dev wlo1		
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o main buzz_lb_main.c -l:libbpf.a -lelf -lz	
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o udp_main udp_lb_user.c -l:libbpf.a -lelf -lz	
+
+clean:
+	rm -f /sys/fs/bpf/xdp_buzz_lb
+	rm -f /sys/fs/bpf/xdp_lb
+	bpftool net detach xdpgeneric dev wlo1 
+	ip link set veth1 xdpgeneric off
+

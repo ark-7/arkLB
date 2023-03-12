@@ -48,9 +48,3 @@ $(BPF_OBJ): %.o: %.c
 	    -Werror \
 	    -O2 -emit-llvm -c -o ${@:.o=.ll} $<
 	llc -march=bpf -filetype=obj -o $@ ${@:.o=.ll}
-
-clean-local:
-	bpftool net detach xdpgeneric dev wlo1
-	rm -f /sys/fs/bpf/$(TARGET)
-	rm $(BPF_OBJ)
-	rm ${BPF_OBJ:.o=.ll}
