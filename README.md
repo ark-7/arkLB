@@ -4,16 +4,19 @@ An L4 network load balancer based on eBPF and XDP
 
  __WARNING: Project not complete yet__
 
-[![Docker](https://img.shields.io/badge/docker%20image-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/aerox86/buzzlb)
+![License](https://img.shields.io/github/license/alphaX86/buzzLB?style=flat-square)
+![Repo Size](https://img.shields.io/github/repo-size/alphaX86/buzzLB?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/alphaX86/buzzLB?style=flat-square)
+![Docker build](https://img.shields.io/docker/automated/aerox86/buzzlb?style=flat-square)
+[![Docker](https://img.shields.io/badge/Docker%20image-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/aerox86/buzzlb)
 
 
 ## Terms
 
 Here are some of the links explaining the eBPF and XDP
 
-[eBPF](https://ebpf.io/)
-
-[XDP](https://www.iovisor.org/technology/xdp)
+- [eBPF](https://ebpf.io/)
+- [XDP](https://www.iovisor.org/technology/xdp)
 
 ## Install guide
 
@@ -29,16 +32,23 @@ sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential 
 sudo apt install linux-tools-generic linux-cloud-tools-generic
 ```
 
-Then run the commands in `sudo` mode
+Then run the commands in `sudo` by entering in `su` mode 
 
 ```bash
-./bootstrap
-./configure
-make
-make install (after cd src)
+sudo su
 ```
 
-After compiling, run the `./main` with `sudo` privileges
+```bash
+sh ./bootstrap # or ./bootstrap.sh
+./configure
+make
+make install 
+
+# To stop running the program
+make clean
+```
+
+After compiling, run the `python hello.py` with `sudo` privileges to see the trace logs
 
 **NOTE: Change your network interface in `Makefile` else the program may not work properly**
 
