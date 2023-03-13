@@ -4,13 +4,17 @@
 #include "../libbpf/src/bpf_helpers.h"
 #include "../libbpf/src/bpf_endian.h"
 
-#define IP_ADDRESS(w,x,y,z) (unsigned int)((256*256*256*w) + (256*256*x) + (256*y) + z)
 #define ETH_P_IP	0x0800
 int k = 2;
 #define MAX_COUNT 100
 #define CLIENT 4
 #define LB 5
 unsigned char bytes[4];
+
+unsigned int IP_ADDRESS(w,x,y,z) {
+    uint res = ((256*256*256*w) + (256*256*x) + (256*y) + z);
+    return res;
+}
 
 void print_ip(unsigned int ip)
 {

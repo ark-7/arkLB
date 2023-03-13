@@ -53,10 +53,9 @@ install:
 	    -Wno-pointer-sign \
 	    -Wno-compare-distinct-pointer-types \
 	    -Werror \
-	    -O2 -emit-llvm -c -o buzz_lb_kern.ll buzz_lb_kern.c
-	llc -march=bpf -filetype=obj -o buzz_lb_kern.o buzz_lb_kern.ll	
-	clang -O2 -g -Wall -target bpf -c -emit-llvm xdp_kern.c -o xdp_kern.ll
-	llc -march=bpf -filetype=obj -o xdp_kern.o xdp_kern.ll
+	    -O2 -emit-llvm -c -o xdp_kern.ll xdp_kern.c
+	llc -march=bpf -filetype=obj -o xdp_kern.o xdp_kern.ll	
+	
 	rm -f /sys/fs/bpf/xdp_lb	
 	echo "Setting up veth interface...Change interface in Makefile if you need"
 	ip link add type veth
