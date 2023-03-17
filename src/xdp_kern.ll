@@ -16,8 +16,8 @@ target triple = "bpf"
 @.str.6 = private unnamed_addr constant [35 x i8] c"Source IP is not equal. Passing...\00", align 1
 @.str.7 = private unnamed_addr constant [18 x i8] c"Passing packet...\00", align 1
 @_license = dso_local global [4 x i8] c"GPL\00", section "license", align 1, !dbg !55
-@"llvm.ethhdr:0:12$0:2" = external global i64, !llvm.preserve.access.index !91 #0
 @"llvm.ethhdr:0:5$0:0:5" = external global i64, !llvm.preserve.access.index !91 #0
+@"llvm.ethhdr:0:12$0:2" = external global i64, !llvm.preserve.access.index !91 #0
 @"llvm.iphdr:0:9$0:7" = external global i64, !llvm.preserve.access.index !97 #0
 @"llvm.iphdr:0:12$0:9" = external global i64, !llvm.preserve.access.index !97 #0
 @"llvm.iphdr:0:16$0:10" = external global i64, !llvm.preserve.access.index !97 #0
@@ -203,7 +203,7 @@ define dso_local i32 @buzz_lb_xdp(%struct.xdp_md* noundef readonly %0) #3 sectio
   %84 = tail call i64 (i8*, i32, ...) inttoptr (i64 6 to i64 (i8*, i32, ...)*)(i8* noundef getelementptr inbounds ([35 x i8], [35 x i8]* @.str.6, i64 0, i64 0), i32 noundef 39) #6, !dbg !257
   %85 = load i64, i64* @"llvm.ethhdr:0:5$0:0:5", align 8
   %86 = getelementptr i8, i8* %9, i64 %85
-  %87 = tail call i8* @llvm.bpf.passthrough.p0i8.p0i8(i32 1, i8* %86)
+  %87 = tail call i8* @llvm.bpf.passthrough.p0i8.p0i8(i32 0, i8* %86)
   store i8 4, i8* %87, align 1, !dbg !258, !tbaa !151
   br label %88
 
@@ -284,10 +284,10 @@ define dso_local i32 @buzz_lb_xdp(%struct.xdp_md* noundef readonly %0) #3 sectio
 }
 
 ; Function Attrs: nofree nosync nounwind readnone
-declare i16* @llvm.bpf.passthrough.p0i16.p0i16(i32, i16*) #4
+declare i8* @llvm.bpf.passthrough.p0i8.p0i8(i32, i8*) #4
 
 ; Function Attrs: nofree nosync nounwind readnone
-declare i8* @llvm.bpf.passthrough.p0i8.p0i8(i32, i8*) #4
+declare i16* @llvm.bpf.passthrough.p0i16.p0i16(i32, i16*) #4
 
 ; Function Attrs: nofree nosync nounwind readnone
 declare i32* @llvm.bpf.passthrough.p0i32.p0i32(i32, i32*) #4
@@ -310,10 +310,10 @@ attributes #6 = { nounwind }
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "k", scope: !2, file: !3, line: 8, type: !90, isLocal: false, isDefinition: true)
 !2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "Ubuntu clang version 14.0.0-1ubuntu1", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !44, globals: !54, splitDebugInlining: false, nameTableKind: None)
-!3 = !DIFile(filename: "xdp_kern.c", directory: "/media/aadhitya/DATA/XCodes/buzzLB/src", checksumkind: CSK_MD5, checksum: "f50c41b77ee919d94fc1a783abb793e6")
+!3 = !DIFile(filename: "xdp_kern.c", directory: "/home/ubuntu/buzzLB/src", checksumkind: CSK_MD5, checksum: "f50c41b77ee919d94fc1a783abb793e6")
 !4 = !{!5, !14}
 !5 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "xdp_action", file: !6, line: 42776, baseType: !7, size: 32, elements: !8)
-!6 = !DIFile(filename: "./vmlinux.h", directory: "/media/aadhitya/DATA/XCodes/buzzLB/src", checksumkind: CSK_MD5, checksum: "11eb692ee35903a9cd527ec4f7485b7b")
+!6 = !DIFile(filename: "./vmlinux.h", directory: "/home/ubuntu/buzzLB/src", checksumkind: CSK_MD5, checksum: "11eb692ee35903a9cd527ec4f7485b7b")
 !7 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
 !8 = !{!9, !10, !11, !12, !13}
 !9 = !DIEnumerator(name: "XDP_ABORTED", value: 0)
@@ -373,7 +373,7 @@ attributes #6 = { nounwind }
 !63 = !DICompositeType(tag: DW_TAG_array_type, baseType: !51, size: 32, elements: !59)
 !64 = !DIGlobalVariableExpression(var: !65, expr: !DIExpression())
 !65 = distinct !DIGlobalVariable(name: "bpf_trace_printk", scope: !2, file: !66, line: 177, type: !67, isLocal: true, isDefinition: true)
-!66 = !DIFile(filename: "./../libbpf/src/bpf_helper_defs.h", directory: "/media/aadhitya/DATA/XCodes/buzzLB/src", checksumkind: CSK_MD5, checksum: "2d210aba22162d34a56b8d1dc5e331a2")
+!66 = !DIFile(filename: "./../libbpf/src/bpf_helper_defs.h", directory: "/home/ubuntu/buzzLB/src", checksumkind: CSK_MD5, checksum: "2d210aba22162d34a56b8d1dc5e331a2")
 !67 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !68, size: 64)
 !68 = !DISubroutineType(types: !69)
 !69 = !{!46, !70, !72, null}

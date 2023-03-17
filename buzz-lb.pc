@@ -5,6 +5,6 @@ libdir=${exec_prefix}/lib
 
 Name: buzz-lb
 Description: L4 eBPF based loadbalancer
-Version: 0.1.1-git
+Version: 0.1.1
 Cflags: -I${includedir}/buzz-lb
 Libs: -L${libdir} -lbuzz-lb

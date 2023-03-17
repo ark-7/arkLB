@@ -56,7 +56,7 @@ AC_CHECK_FILE([/sys/kernel/btf/vmlinux], [], [
 AC_ARG_WITH([linux],
     [AS_HELP_STRING([--with-linux], [Linux source headers [[default: /usr/src/linux]]])],
     [LINUX_HEADERS="$withval"],
-    [LINUX_HEADERS=/usr/src/linux-headers-5.15.0-52]
+    [LINUX_HEADERS=/usr/src/linux-aws-headers-5.15.0-1028]
 )
 AC_SUBST([LINUX_HEADERS])
 dnl linux source headers

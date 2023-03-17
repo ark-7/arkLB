@@ -93,14 +93,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-pc-linux-gnu
-host_triplet = x86_64-pc-linux-gnu
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
@@ -197,14 +192,10 @@ DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/buzz-lb.pc.in \
 	$(srcdir)/config.h.in $(top_srcdir)/build-aux/ar-lib \
 	$(top_srcdir)/build-aux/compile \
-	$(top_srcdir)/build-aux/config.guess \
-	$(top_srcdir)/build-aux/config.sub \
 	$(top_srcdir)/build-aux/install-sh \
-	$(top_srcdir)/build-aux/ltmain.sh \
 	$(top_srcdir)/build-aux/missing $(top_srcdir)/src/Makefile.in \
 	README.md build-aux/ar-lib build-aux/compile \
-	build-aux/config.guess build-aux/config.sub \
-	build-aux/install-sh build-aux/ltmain.sh build-aux/missing
+	build-aux/install-sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -249,14 +240,14 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} '/media/aadhitya/DATA/XCodes/buzzLB/build-aux/missing' aclocal-1.16
+ACLOCAL = ${SHELL} '/home/ubuntu/buzzLB/build-aux/missing' aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} '/media/aadhitya/DATA/XCodes/buzzLB/build-aux/missing' autoconf
-AUTOHEADER = ${SHELL} '/media/aadhitya/DATA/XCodes/buzzLB/build-aux/missing' autoheader
-AUTOMAKE = ${SHELL} '/media/aadhitya/DATA/XCodes/buzzLB/build-aux/missing' automake-1.16
-AWK = mawk
+AUTOCONF = ${SHELL} '/home/ubuntu/buzzLB/build-aux/missing' autoconf
+AUTOHEADER = ${SHELL} '/home/ubuntu/buzzLB/build-aux/missing' autoheader
+AUTOMAKE = ${SHELL} '/home/ubuntu/buzzLB/build-aux/missing' automake-1.16
+AWK = gawk
 BPFTOOL = yes
 CC = gcc
 CCDEPMODE = depmode=none
@@ -268,89 +259,62 @@ CTAGS = ctags
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DLLTOOL = false
-DSYMUTIL = 
-DUMPBIN = 
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
-EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-FGREP = /usr/bin/grep -F
-GREP = /usr/bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
 LIBS = -lbpf 
-LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LINUX_HEADERS = /usr/src/linux-headers-5.15.0-52
-LIPO = 
+LINUX_HEADERS = /usr/src/linux-aws-headers-5.15.0-1028
 LN_S = ln -s
 LTLIBOBJS = 
-LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} '/media/aadhitya/DATA/XCodes/buzzLB/build-aux/missing' makeinfo
-MANIFEST_TOOL = :
+MAKEINFO = ${SHELL} '/home/ubuntu/buzzLB/build-aux/missing' makeinfo
 MKDIR_P = /usr/bin/mkdir -p
-NM = /usr/bin/nm -B
-NMEDIT = 
-OBJDUMP = objdump
 OBJEXT = o
-OTOOL = 
-OTOOL64 = 
 PACKAGE = buzz-lb
 PACKAGE_BUGREPORT = aadhitya864@gmail.com
 PACKAGE_NAME = buzz-lb
-PACKAGE_STRING = buzz-lb 0.1.1-git
+PACKAGE_STRING = buzz-lb 0.1.1
 PACKAGE_TARNAME = buzz-lb
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1.1-git
+PACKAGE_VERSION = 0.1.1
 PATH_SEPARATOR = :
 PKGCONFIG_USER = ${exec_prefix}/lib/pkgconfig
-RANLIB = ranlib
-SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
-STRIP = strip
-VERSION = 0.1.1-git
-abs_builddir = /media/aadhitya/DATA/XCodes/buzzLB
-abs_srcdir = /media/aadhitya/DATA/XCodes/buzzLB
-abs_top_builddir = /media/aadhitya/DATA/XCodes/buzzLB
-abs_top_srcdir = /media/aadhitya/DATA/XCodes/buzzLB
+STRIP = 
+VERSION = 0.1.1
+abs_builddir = /home/ubuntu/buzzLB
+abs_srcdir = /home/ubuntu/buzzLB
+abs_top_builddir = /home/ubuntu/buzzLB
+abs_top_srcdir = /home/ubuntu/buzzLB
 ac_ct_AR = ar
 ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-pc-linux-gnu
 build_alias = 
-build_cpu = x86_64
-build_os = linux-gnu
-build_vendor = pc
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-pc-linux-gnu
 host_alias = 
-host_cpu = x86_64
-host_os = linux-gnu
-host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /media/aadhitya/DATA/XCodes/buzzLB/build-aux/install-sh
+install_sh = ${SHELL} /home/ubuntu/buzzLB/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -441,15 +405,6 @@ src/Makefile: $(top_builddir)/config.status $(top_srcdir)/src/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 buzz-lb.pc: $(top_builddir)/config.status $(srcdir)/buzz-lb.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-
-mostlyclean-libtool:
-	-rm -f *.lo
-
-clean-libtool:
-	-rm -rf .libs _libs
-
-distclean-libtool:
-	-rm -f libtool config.lt
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(pkgconfig_DATA)'; test -n "$(pkgconfigdir)" || list=; \
@@ -814,13 +769,12 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-hdr \
-	distclean-libtool distclean-tags
+distclean-am: clean-am distclean-generic distclean-hdr distclean-tags
 
 dvi: dvi-recursive
 
@@ -870,7 +824,7 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-generic
 
 pdf: pdf-recursive
 
@@ -886,10 +840,9 @@ uninstall-am: uninstall-pkgconfigDATA
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
 	am--refresh check check-am clean clean-cscope clean-generic \
-	clean-libtool cscope cscopelist-am ctags ctags-am dist \
-	dist-all dist-bzip2 dist-gzip dist-lzip dist-shar dist-tarZ \
-	dist-xz dist-zip dist-zstd distcheck distclean \
-	distclean-generic distclean-hdr distclean-libtool \
+	cscope cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
+	dist-gzip dist-lzip dist-shar dist-tarZ dist-xz dist-zip \
+	dist-zstd distcheck distclean distclean-generic distclean-hdr \
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
 	dvi-am html html-am info info-am install install-am \
 	install-data install-data-am install-dvi install-dvi-am \
@@ -898,9 +851,8 @@ uninstall-am: uninstall-pkgconfigDATA
 	install-pdf-am install-pkgconfigDATA install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
 	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-pkgconfigDATA
+	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am tags \
+	tags-am uninstall uninstall-am uninstall-pkgconfigDATA
 
 .PRECIOUS: Makefile
 
