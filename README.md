@@ -27,9 +27,13 @@ Install required packages
 ```bash
 sudo apt update
 
-sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
+sudo apt install clang llvm libelf-dev libbpf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
 
 sudo apt install linux-tools-generic linux-cloud-tools-generic
+
+# You may need to further install tools for your kernel version
+sudo apt install linux-tools-$(uname -r) linux-cloud-tools-$(uname -r)
+```
 ```
 
 Then run the commands in `sudo` by entering in `su` mode 
@@ -44,7 +48,7 @@ sh ./bootstrap # or ./bootstrap.sh
 make
 make install 
 
-# To stop running the program
+# To stop running the XDP program
 make clean
 ```
 
@@ -69,8 +73,9 @@ _NOTE: This may update from time to time_
 - bcc
 - libbpf
 - clang
-- llvm
+- Terraform
 - Python
+- Docker
 
 ## License
 
