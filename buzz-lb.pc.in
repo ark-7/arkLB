@@ -3,8 +3,8 @@ exec_prefix=@exec_prefix@
 includedir=@includedir@
 libdir=@libdir@
 
-Name: buzz-lb
-Description: L4 eBPF based loadbalancer
+Name: arkLB
+Description: eBPF/XDP load balancer for cloud
 Version: @VERSION@
-Cflags: -I${includedir}/buzz-lb
-Libs: -L${libdir} -lbuzz-lb
+Cflags: -I${includedir}/arkLB
+Libs: -L${libdir} -larkLB

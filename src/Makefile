@@ -59,15 +59,14 @@ install:
 	rm -f /sys/fs/bpf/xdp_lb	
 	echo "Setting up veth interface...Change interface in Makefile if you need"
 	ip link add type veth
-	bpftool net detach xdpgeneric dev wlo1
-	bpftool prog load xdp_kern.o /sys/fs/bpf/xdp_lb --legacy
-	bpftool net attach xdpgeneric pinned /sys/fs/bpf/xdp_lb dev wlo1		
+	bpftool net detach xdpgeneric dev eth0
+	bpftool prog load xdp_kern.o /sys/fs/bpf/xdp_lb
+	bpftool net attach xdpgeneric pinned /sys/fs/bpf/xdp_lb dev eth0		
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o main buzz_lb_main.c -l:libbpf.a -lelf -lz	
 	gcc -Wall -Ilibbpf/src -Ilibbpf/src/include/uapi -Llibbpf/src -o udp_main udp_lb_user.c -l:libbpf.a -lelf -lz	
 
 clean:
 	rm -f /sys/fs/bpf/xdp_buzz_lb
 	rm -f /sys/fs/bpf/xdp_lb
-	bpftool net detach xdpgeneric dev wlo1 
+	bpftool net detach xdpgeneric dev eth0 
 	ip link set veth1 xdpgeneric off
-
