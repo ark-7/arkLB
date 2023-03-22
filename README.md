@@ -1,4 +1,4 @@
-# buzzLB
+# arkLB
 
 An L4 network load balancer based on eBPF and XDP
 
