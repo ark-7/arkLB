@@ -86,7 +86,6 @@ m4/ltversion.m4
 m4/lt~obsolete.m4
 
 build-aux
-Makefile.in
 /ar-lib
 /mdate-sh
 /py-compile

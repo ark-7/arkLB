@@ -1,6 +1,6 @@
-# buzzLB
+# arkLB
 
-An L4 network load balancer based on eBPF and XDP
+An eBPF/XDP load balancer made for cloud and microservices 
 
  __WARNING: Project not complete yet__
 
@@ -27,7 +27,7 @@ Install required packages
 ```bash
 sudo apt update
 
-sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
+sudo apt install clang llvm libelf-dev libbpf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
 
 sudo apt install linux-tools-generic linux-cloud-tools-generic
 ```
@@ -66,11 +66,12 @@ docker compose up
 
 _NOTE: This may update from time to time_
 
-- bcc
+- BCC
 - libbpf
 - clang
-- llvm
+- LLVM
 - Python
+- Terraform
 
 ## License
 
