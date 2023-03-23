@@ -4,11 +4,13 @@ An eBPF/XDP load balancer for cloud and microservices
 
  __WARNING: Project not complete yet__
 
-![License](https://img.shields.io/github/license/alphaX86/buzzLB?style=flat-square)
-![Repo Size](https://img.shields.io/github/repo-size/alphaX86/buzzLB?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/alphaX86/buzzLB?style=flat-square)
-![Docker build](https://img.shields.io/docker/automated/aerox86/buzzlb?style=flat-square)
-[![Docker](https://img.shields.io/badge/Docker%20image-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/aerox86/buzzlb)
+![License](https://img.shields.io/github/license/ark-7/arkLB?style=flat-square)
+![Repo Size](https://img.shields.io/github/repo-size/ark-7/arkLB?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/ark-7/arkLB?style=flat-square)
+![Docker build](https://img.shields.io/docker/automated/aerox86/arklb?style=flat-square)
+
+## Quick Start
+[![Docker](https://img.shields.io/badge/Docker%20image-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/aerox86/arklb)
 
 
 ## Terms
@@ -33,7 +35,6 @@ sudo apt install linux-tools-generic linux-cloud-tools-generic
 
 # You may need to further install tools for your kernel version
 sudo apt install linux-tools-$(uname -r) linux-cloud-tools-$(uname -r)
-```
 ```
 
 Then run the commands in `sudo` by entering in `su` mode 

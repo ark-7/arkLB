@@ -1,6 +1,6 @@
 services:
-  buzzlb: 
-    image: aerox86/buzzlb:latest
+  arklb: 
+    image: aerox86/arklb:latest-stable
     working_dir: /app
 
   nginx-backend-1:
