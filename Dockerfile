@@ -1,8 +1,16 @@
-FROM amd64/ubuntu:latest
+FROM ubuntu:latest
 WORKDIR /app
 COPY . .
-RUN apt update -q 
-RUN apt install -y clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common wget tar
-RUN wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.15.tar.xz
-RUN tar -xvf linux-6.1.15.tar.xz
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+RUN apt-get update && \
+    apt-get install -y build-essential git cmake \
+                       zlib1g-dev libevent-dev \
+                       libelf-dev llvm \
+                       clang libc6-dev-i386 wget tar \
+                       nano libbpf-dev autoconf linux-tools-common \
+                       libtool
+
+RUN ln -s /usr/include/x86_64-linux-gnu/asm/ /usr/include/asm
+RUN git submodule update --init --recursive
+RUN git clone --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && \
+    cp -r linux/* /usr/include/linux/
+CMD mount -t debugfs none /sys/kernel/debug 

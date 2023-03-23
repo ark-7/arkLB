@@ -56,7 +56,7 @@ int ark_lb_xdp(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    bpf_trace_printk("Heya! XDP buzzLB here!", sizeof("Heya! XDP buzzLB here!"));
+    bpf_trace_printk("Heya! XDP arkLB here!", sizeof("Heya! XDP arkLB here!"));
     
     struct ethhdr *eth = data;
     if (data + sizeof(struct ethhdr) > data_end)
