@@ -1,6 +1,6 @@
 # arkLB
 
-An L4 network load balancer based on eBPF and XDP
+An eBPF/XDP load balancer for cloud and microservices
 
  __WARNING: Project not complete yet__
 
