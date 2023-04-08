@@ -99,4 +99,5 @@ build-aux/
 build/
 libtool
 config.h
+.vagrant/
 
