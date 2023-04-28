@@ -1,4 +1,4 @@
-AC_INIT([buzz-lb], m4_esyscmd_s(cat VERSION), [aadhitya864@gmail.com])
+AC_INIT([arklb], m4_esyscmd_s(cat VERSION), [aadhitya864@gmail.com])
 AC_CONFIG_AUX_DIR([build-aux])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
@@ -56,7 +56,7 @@ AC_CHECK_FILE([/sys/kernel/btf/vmlinux], [], [
 AC_ARG_WITH([linux],
     [AS_HELP_STRING([--with-linux], [Linux source headers [[default: /usr/src/linux]]])],
     [LINUX_HEADERS="$withval"],
-    [LINUX_HEADERS=/usr/src/linux-aws-headers-5.15.0-1028]
+    [LINUX_HEADERS=/usr/include/linux]
 )
 AC_SUBST([LINUX_HEADERS])
 dnl linux source headers
@@ -79,6 +79,6 @@ AC_CHECK_FILES([
 AC_CONFIG_FILES([
     Makefile
     src/Makefile
-    buzz-lb.pc
+    arklb.pc
 ])
 AC_OUTPUT

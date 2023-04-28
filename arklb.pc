@@ -5,6 +5,6 @@ libdir=${exec_prefix}/lib
 
 Name: arkLB
 Description: eBPF/XDP load balancer for cloud
-Version: 0.1.2
+Version: 0.1.5
 Cflags: -I${includedir}/arkLB
 Libs: -L${libdir} -larkLB

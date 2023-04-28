@@ -6,7 +6,7 @@
 
 #define ETH_P_IP	0x0800
 int k = 2;
-#define MAX_COUNT 100
+#define MAX_COUNT 3
 #define CLIENT 4
 #define LB 5
 unsigned char bytes[4];
@@ -56,7 +56,7 @@ int ark_lb_xdp(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    bpf_trace_printk("Heya! XDP arkLB here!", sizeof("Heya! XDP arkLB here!"));
+    bpf_trace_printk("Heya! arkLB here!", sizeof("Heya! arkLB here!"));
     
     struct ethhdr *eth = data;
     if (data + sizeof(struct ethhdr) > data_end)
@@ -69,9 +69,11 @@ int ark_lb_xdp(struct xdp_md *ctx) {
     if (data + sizeof(struct ethhdr) + sizeof(struct iphdr) > data_end)
         return XDP_ABORTED;
 
-    if (iph->protocol != IPPROTO_TCP)
+    if (iph->protocol != IPPROTO_TCP) {
         bpf_trace_printk("Got non-TCP packet", sizeof("Got non-TCP packet"));
-
+        return XDP_PASS;
+    }
+        
     bpf_trace_printk("Got TCP packet", sizeof("Got TCP packet"));
     bpf_trace_printk("Source IP: %u", sizeof("Source IP: %u"), iph->saddr);
     // Change IP address here

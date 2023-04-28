@@ -19,7 +19,7 @@ ACLOCAL_AMFLAGS = -I m4
 # PKGCONFIG_USER comes from configure.ac
 pkgconfigdir = $(PKGCONFIG_USER)
 pkgconfig_DATA = \
-	buzz-lb.pc \
+	arklb.pc \
 	$(NULL)
 	
 # Change network interface here

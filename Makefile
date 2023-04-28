@@ -77,10 +77,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/buzz-lb
-pkgincludedir = $(includedir)/buzz-lb
-pkglibdir = $(libdir)/buzz-lb
-pkglibexecdir = $(libexecdir)/buzz-lb
+pkgdatadir = $(datadir)/arklb
+pkgincludedir = $(includedir)/arklb
+pkglibdir = $(libdir)/arklb
+pkglibexecdir = $(libexecdir)/arklb
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -104,7 +104,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = src/Makefile buzz-lb.pc
+CONFIG_CLEAN_FILES = src/Makefile arklb.pc
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -189,7 +189,7 @@ am__define_uniq_tagged_files = \
     if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
   done | $(am__uniquify_input)`
 DIST_SUBDIRS = $(SUBDIRS)
-am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/buzz-lb.pc.in \
+am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/arklb.pc.in \
 	$(srcdir)/config.h.in $(top_srcdir)/build-aux/ar-lib \
 	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/install-sh \
@@ -278,11 +278,11 @@ LTLIBOBJS =
 MAKEINFO = ${SHELL} '/home/ubuntu/ark-AWS/build-aux/missing' makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
-PACKAGE = buzz-lb
+PACKAGE = arklb
 PACKAGE_BUGREPORT = aadhitya864@gmail.com
-PACKAGE_NAME = buzz-lb
-PACKAGE_STRING = buzz-lb 0.1.2
-PACKAGE_TARNAME = buzz-lb
+PACKAGE_NAME = arklb
+PACKAGE_STRING = arklb 0.1.2
+PACKAGE_TARNAME = arklb
 PACKAGE_URL = 
 PACKAGE_VERSION = 0.1.2
 PATH_SEPARATOR = :
@@ -346,7 +346,7 @@ ACLOCAL_AMFLAGS = -I m4
 # PKGCONFIG_USER comes from configure.ac
 pkgconfigdir = $(PKGCONFIG_USER)
 pkgconfig_DATA = \
-	buzz-lb.pc \
+	arklb.pc \
 	$(NULL)
 
 all: config.h
@@ -403,7 +403,7 @@ distclean-hdr:
 	-rm -f config.h stamp-h1
 src/Makefile: $(top_builddir)/config.status $(top_srcdir)/src/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-buzz-lb.pc: $(top_builddir)/config.status $(srcdir)/buzz-lb.pc.in
+arklb.pc: $(top_builddir)/config.status $(srcdir)/arklb.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
