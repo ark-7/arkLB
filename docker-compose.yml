@@ -8,7 +8,4 @@ services:
     
   nginx-backend-2:
     image: nginxdemos/hello:plain-text
-
-  nginx-backend-3:
-    image: nginxdemos/hello:plain-text
-    
+  
