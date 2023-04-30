@@ -9,7 +9,7 @@ int k = 2;
 #define MAX_COUNT 3
 #define CLIENT 4
 #define LB 5
-unsigned char bytes[4];
+unsigned char bytes[4] = {0,0,0,0};
 
 unsigned int IP_ADDRESS(w,x,y,z) {
     uint res = ((256*256*256*w) + (256*256*x) + (256*y) + z);
