@@ -9,7 +9,7 @@ int k = 2;
 #define MAX_COUNT 3
 #define CLIENT 4
 #define LB 5
-unsigned char bytes[4];
+unsigned char bytes[4] = {0,0,0,0};
 
 unsigned int IP_ADDRESS(w,x,y,z) {
     uint res = ((256*256*256*w) + (256*256*x) + (256*y) + z);
@@ -56,7 +56,7 @@ int ark_lb_xdp(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    bpf_trace_printk("Heya! arkLB here!", sizeof("Heya! arkLB here!"));
+    bpf_printk("Heya! arkLB here!", sizeof("Heya! arkLB here!"));
     
     struct ethhdr *eth = data;
     if (data + sizeof(struct ethhdr) > data_end)
@@ -70,15 +70,15 @@ int ark_lb_xdp(struct xdp_md *ctx) {
         return XDP_ABORTED;
 
     if (iph->protocol != IPPROTO_TCP) {
-        bpf_trace_printk("Got non-TCP packet", sizeof("Got non-TCP packet"));
+        bpf_printk("Got non-TCP packet", sizeof("Got non-TCP packet"));
         return XDP_PASS;
     }
         
-    bpf_trace_printk("Got TCP packet", sizeof("Got TCP packet"));
-    bpf_trace_printk("Source IP: %u", sizeof("Source IP: %u"), iph->saddr);
+    bpf_printk("Got TCP packet", sizeof("Got TCP packet"));
+    bpf_printk("Source IP: %u", sizeof("Source IP: %u"), iph->saddr);
     // Change IP address here
     uint32_t ip = IP_ADDRESS(164,113,193,34);
-    bpf_trace_printk("Client IP: %u", sizeof("Client IP: %u"), ip);
+    bpf_printk("Client IP: %u", sizeof("Client IP: %u"), ip);
     if (iph->saddr == IP_ADDRESS(164,113,193,34))
     {
         if(k == MAX_COUNT)
@@ -88,21 +88,21 @@ int ark_lb_xdp(struct xdp_md *ctx) {
         if(bpf_ktime_get_ns() % 2) {
             be = k++;
         }
-        bpf_trace_printk("Got packet from client, sending to BE %d", sizeof("Got packet from client, sending to BE %d"), be);
+        bpf_printk("Got packet from client, sending to BE %d", sizeof("Got packet from client, sending to BE %d"), be);
         iph->daddr = IP_ADDRESS(127,0,0,be);
         eth->h_dest[5] = be;
     }
     else
     {
         iph->daddr = IP_ADDRESS(127,0,0,1);
-        bpf_trace_printk("Source IP is not equal. Passing...", sizeof("Source IP is not equal. Redirecting..."));
+        bpf_printk("Source IP is not equal. Passing...", sizeof("Source IP is not equal. Redirecting..."));
         eth->h_dest[5] = CLIENT;
     }
     iph->saddr = IP_ADDRESS(127,0,0,LB);
     eth->h_source[5] = LB;
 
     iph->check = iph_csum(iph);
-    bpf_trace_printk("Passing packet...", sizeof("Passing packet..."));
+    bpf_printk("Passing packet...", sizeof("Passing packet..."));
     return XDP_TX;
 }
 
