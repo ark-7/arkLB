@@ -77,9 +77,9 @@ int ark_lb_xdp(struct xdp_md *ctx) {
     bpf_printk("Got TCP packet", sizeof("Got TCP packet"));
     bpf_printk("Source IP: %u", sizeof("Source IP: %u"), iph->saddr);
     // Change IP address here
-    uint32_t ip = IP_ADDRESS(164,113,193,34);
-    bpf_printk("Client IP: %u", sizeof("Client IP: %u"), ip);
-    if (iph->saddr == IP_ADDRESS(164,113,193,34))
+    //uint32_t ip = IP_ADDRESS(164,113,193,34);
+    //bpf_printk("Client IP: %u", sizeof("Client IP: %u"), ip);
+    if (iph->saddr != IP_ADDRESS(127,0,0,1)) // Change IP here
     {
         if(k == MAX_COUNT)
             k = 2;
@@ -89,7 +89,7 @@ int ark_lb_xdp(struct xdp_md *ctx) {
             be = k++;
         }
         bpf_printk("Got packet from client, sending to BE %d", sizeof("Got packet from client, sending to BE %d"), be);
-        iph->daddr = IP_ADDRESS(127,0,0,be);
+        iph->daddr = IP_ADDRESS(127,0,0,be); // Dest IP here
         eth->h_dest[5] = be;
     }
     else
@@ -98,8 +98,8 @@ int ark_lb_xdp(struct xdp_md *ctx) {
         bpf_printk("Source IP is not equal. Passing...", sizeof("Source IP is not equal. Redirecting..."));
         eth->h_dest[5] = CLIENT;
     }
-    iph->saddr = IP_ADDRESS(127,0,0,LB);
-    eth->h_source[5] = LB;
+    //iph->saddr = IP_ADDRESS(127,0,0,LB); // Source IP but its best not to modify it for handshake to work
+    //eth->h_source[5] = LB;
 
     iph->check = iph_csum(iph);
     bpf_printk("Passing packet...", sizeof("Passing packet..."));
