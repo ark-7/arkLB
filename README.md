@@ -53,6 +53,16 @@ If you have Docker installed in your system, you can workaround the project usin
 docker compose up
 ```
 
+## Terraform
+
+If you have Terraform installed in your system, you can run the following commands to create VMs in GCP/AWS and run the project in it. Make sure to change the values in `terraform/gcp/main.tf` or `terraform/aws/main.tf` to your needs.
+
+```bash
+cd terraform/gcp # or cd terraform/aws
+terraform init
+terraform apply
+```
+
 ## Tools used
 
 - bcc
