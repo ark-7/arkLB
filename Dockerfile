@@ -12,5 +12,5 @@ RUN ln -s /usr/include/x86_64-linux-gnu/asm/ /usr/include/asm
 RUN git submodule update --init --recursive
 RUN git clone --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && \
     cp -r linux/* /usr/include/linux/
-CMD mount -t debugfs none /sys/kernel/debug 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["tail"]
+CMD ["-f","/dev/null"]
