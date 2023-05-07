@@ -1,11 +1,9 @@
 services:
   arklb: 
-    image: aerox86/arklb:latest-stable
-    working_dir: /app
-
+    image: aerox86/arklb:latest
   nginx-backend-1:
     image: nginxdemos/hello:plain-text
-    
   nginx-backend-2:
     image: nginxdemos/hello:plain-text
+
   

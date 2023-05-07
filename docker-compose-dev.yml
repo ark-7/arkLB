@@ -1,0 +1,7 @@
+services:
+  arklb: 
+    image: aerox86/arklb:latest
+  nginx-backend-1:
+    image: nginxdemos/hello:plain-text
+  nginx-backend-2:
+    image: nginxdemos/hello:plain-text
