@@ -99,3 +99,4 @@ build/
 libtool
 config.h
 .vagrant/
+/terraform/ark/.terraform.lock.hcl
