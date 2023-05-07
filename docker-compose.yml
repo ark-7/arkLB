@@ -1,13 +1,17 @@
-services:
-  arklb: 
-    image: aerox86/arklb:latest
-    working_dir: /app
-    command: ["tail", "-f", "/dev/null"]
+version: '3'
 
+services:
+  arklb:
+    image: aerox86/arklb:latest
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - /lib/modules:/lib/modules
   nginx-backend-1:
     image: nginxdemos/hello:plain-text
-
+    ports:
+      - "8082:80"
   nginx-backend-2:
     image: nginxdemos/hello:plain-text
-    
-  
+    ports:
+      - "8083:80"

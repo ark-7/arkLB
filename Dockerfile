@@ -12,5 +12,3 @@ RUN ln -s /usr/include/x86_64-linux-gnu/asm/ /usr/include/asm
 RUN git submodule update --init --recursive
 RUN git clone --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && \
     cp -r linux/* /usr/include/linux/
-ENTRYPOINT ["tail"]
-CMD ["-f","/dev/null"]
