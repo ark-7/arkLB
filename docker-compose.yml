@@ -5,6 +5,7 @@ services:
     image: aerox86/arklb:latest
     privileged: true
     network_mode: "host"
+    tty: true
     volumes:
       - /lib/modules:/lib/modules
   nginx-backend-1:

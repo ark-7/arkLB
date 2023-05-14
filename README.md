@@ -53,6 +53,11 @@ If you have Docker installed in your system, you can workaround the project usin
 docker compose up
 ```
 
+```bash
+# SSH into the container and edit details from there
+sudo docker exec -it arklb-arklb-1 /bin/bash
+```
+
 ## Terraform
 
 If you have Terraform installed in your system, you can run the following commands to create VMs in GCP/AWS and run the project in it. Make sure to change the values in `terraform/gcp/main.tf` or `terraform/aws/main.tf` to your needs.
