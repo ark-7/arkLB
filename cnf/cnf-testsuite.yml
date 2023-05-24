@@ -1,0 +1,12 @@
+---
+allowlist_helm_chart_container_names: [] # [LIST_OF_CONTAINERS_ALLOWED_TO_RUN_PRIVLIDGED]
+helm_chart: arklb/arklb # PUBLISHED_CNFS_HELM_CHART_REPO/NAME ; or
+helm_repository: # CONFIGURATION OF HELM REPO - ONLY NEEDED WHEN USING helm_chart 
+  name: arklb # HELM_CHART_REPOSITORY_NAME
+  repo_url: https://ark-7.github.io/arkLB-helm/ # HELM_CHART_REPOSITORY_URL
+#helm_directory: coredns # PATH_TO_CNFS_HELM_CHART ; or
+#manifest_directory: coredns # PATH_TO_DIRECTORY_OF_CNFS_MANIFEST_FILES ; or
+release_name: arklb # DESIRED_HELM_RELEASE_NAME
+helm_values: --versions 0.1.5 #--set persistence.enabled=false
+helm_install_namespace: ark-cnf # Installs the CNF to it's own namespace and not in the default namespace
+
