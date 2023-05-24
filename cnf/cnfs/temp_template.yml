@@ -1,0 +1,94 @@
+---
+# Source: arklb/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ark
+  labels:
+    helm.sh/chart: arklb-0.1.6
+    app.kubernetes.io/name: arklb
+    app.kubernetes.io/instance: arklb
+    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: arklb/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: arklb
+  labels:
+    helm.sh/chart: arklb-0.1.6
+    app.kubernetes.io/name: arklb
+    app.kubernetes.io/instance: arklb
+    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: NodePort
+  ports:
+    - port: 8081
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: arklb
+    app.kubernetes.io/instance: arklb
+---
+# Source: arklb/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arklb
+  labels:
+    helm.sh/chart: arklb-0.1.6
+    app.kubernetes.io/name: arklb
+    app.kubernetes.io/instance: arklb
+    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: arklb
+      app.kubernetes.io/instance: arklb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: arklb
+        app.kubernetes.io/instance: arklb
+    spec:
+      serviceAccountName: ark
+      securityContext:
+        {}
+      containers:
+        - name: arklb
+          securityContext:
+            privileged: true
+          image: "aerox86/arklb:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          resources:
+            {}
+---
+# Source: arklb/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "arklb-test-connection"
+  labels:
+    helm.sh/chart: arklb-0.1.6
+    app.kubernetes.io/name: arklb
+    app.kubernetes.io/instance: arklb
+    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['arklb:8081']
+  restartPolicy: Never

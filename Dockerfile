@@ -7,8 +7,12 @@ RUN apt-get update && \
                        libelf-dev llvm \
                        clang libc6-dev-i386 wget tar \
                        nano libbpf-dev autoconf linux-tools-common \
-                       libtool libssl-dev gcc
+                       libtool libssl-dev gcc apache2 apache2-utils 
 RUN ln -s /usr/include/x86_64-linux-gnu/asm/ /usr/include/asm
 RUN git submodule update --init --recursive
 RUN git clone --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && \
     cp -r linux/* /usr/include/linux/
+RUN apt clean
+EXPOSE 80
+EXPOSE 8081
+CMD [“apache2ctl”, “-D”, “FOREGROUND”]
