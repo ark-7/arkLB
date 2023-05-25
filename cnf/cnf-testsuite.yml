@@ -9,11 +9,10 @@ helm_repository: # CONFIGURATION OF HELM REPO - ONLY NEEDED WHEN USING helm_char
 release_name: arklb # DESIRED_HELM_RELEASE_NAME
 #helm_values: --version 0.1.8 --set persistence.enabled=false
 helm_install_namespace: ark-cnf # Installs the CNF to it's own namespace and not in the default namespace
-helm_chart_container_name: arklb
 
 container_names: 
   - name: arklb
-    rolling_update_test_tag: "v0.1.9"
-    rolling_downgrade_test_tag: "v0.1.8"
+    rolling_update_test_tag: "v0.1.10"
+    rolling_downgrade_test_tag: "v0.1.9"
     rolling_version_change_test_tag: latest
     rollback_from_tag: latest
