@@ -5,10 +5,10 @@ kind: ServiceAccount
 metadata:
   name: ark
   labels:
-    helm.sh/chart: arklb-0.1.6
+    helm.sh/chart: arklb-0.1.8
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/version: "v0.1.9"
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: arklb/templates/service.yaml
@@ -17,15 +17,15 @@ kind: Service
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.6
+    helm.sh/chart: arklb-0.1.8
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/version: "v0.1.9"
     app.kubernetes.io/managed-by: Helm
 spec:
   type: NodePort
   ports:
-    - port: 8081
+    - port: 80
       targetPort: http
       protocol: TCP
       name: http
@@ -39,10 +39,10 @@ kind: Deployment
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.6
+    helm.sh/chart: arklb-0.1.8
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/version: "v0.1.9"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -63,11 +63,11 @@ spec:
         - name: arklb
           securityContext:
             privileged: true
-          image: "aerox86/arklb:latest"
+          image: "aerox86/arklb:v0.1.9"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 8081
+              containerPort: 80
               protocol: TCP
           resources:
             {}
@@ -78,10 +78,10 @@ kind: Pod
 metadata:
   name: "arklb-test-connection"
   labels:
-    helm.sh/chart: arklb-0.1.6
+    helm.sh/chart: arklb-0.1.8
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "0.1.6"
+    app.kubernetes.io/version: "v0.1.9"
     app.kubernetes.io/managed-by: Helm
   annotations:
     "helm.sh/hook": test
@@ -90,5 +90,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['arklb:8081']
+      args: ['arklb:80']
   restartPolicy: Never
