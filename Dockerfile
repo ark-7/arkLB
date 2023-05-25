@@ -13,6 +13,5 @@ RUN git submodule update --init --recursive
 RUN git clone --depth 1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && \
     cp -r linux/* /usr/include/linux/
 RUN apt clean
-EXPOSE 80
-EXPOSE 8081
-CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+EXPOSE 80 8084 8085
+CMD ["apache2ctl", "-D", "FOREGROUND"]
