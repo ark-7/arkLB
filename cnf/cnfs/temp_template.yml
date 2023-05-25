@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   name: ark
   labels:
-    helm.sh/chart: arklb-0.1.8
+    helm.sh/chart: arklb-0.1.9
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
     app.kubernetes.io/version: "v0.1.9"
@@ -17,7 +17,7 @@ kind: Service
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.8
+    helm.sh/chart: arklb-0.1.9
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
     app.kubernetes.io/version: "v0.1.9"
@@ -39,7 +39,7 @@ kind: Deployment
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.8
+    helm.sh/chart: arklb-0.1.9
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
     app.kubernetes.io/version: "v0.1.9"
@@ -69,6 +69,14 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           resources:
             {}
 ---
@@ -78,7 +86,7 @@ kind: Pod
 metadata:
   name: "arklb-test-connection"
   labels:
-    helm.sh/chart: arklb-0.1.8
+    helm.sh/chart: arklb-0.1.9
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
     app.kubernetes.io/version: "v0.1.9"
