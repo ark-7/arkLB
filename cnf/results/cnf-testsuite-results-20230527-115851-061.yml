@@ -1,0 +1,24 @@
+---
+name: cnf testsuite
+testsuite_version: v0.42.2
+status:
+command: /home/gitpod/.cnf-testsuite/cnf-testsuite cert cnf-config=./cnf-testsuite.yml
+points:
+exit_code: 2
+items:
+- name: helm_chart_valid
+  status: passed
+  type: normal
+  points: 5
+- name: helm_chart_published
+  status: passed
+  type: normal
+  points: 5
+- name: helm_deploy
+  status: passed
+  type: normal
+  points: 5
+- name: increase_decrease_capacity
+  status: passed
+  type: essential
+  points: 100
