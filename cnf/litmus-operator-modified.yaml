@@ -160,7 +160,7 @@ spec:
         name: chaos-operator
     spec:
       nodeSelector:
-        kubernetes.io/hostname: gke-ark-cnf-default-pool-7fecd548-b2br
+        kubernetes.io/hostname: gke-ark-cnf-default-pool-7fecd548-dbjc
       serviceAccountName: litmus
       containers:
         - name: chaos-operator

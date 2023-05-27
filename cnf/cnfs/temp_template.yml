@@ -3,12 +3,12 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ark
+  name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.9
+    helm.sh/chart: arklb-0.1.11
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "v0.1.9"
+    app.kubernetes.io/version: "v0.1.10"
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: arklb/templates/service.yaml
@@ -17,13 +17,13 @@ kind: Service
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.9
+    helm.sh/chart: arklb-0.1.11
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "v0.1.9"
+    app.kubernetes.io/version: "v0.1.10"
     app.kubernetes.io/managed-by: Helm
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: http
@@ -39,10 +39,10 @@ kind: Deployment
 metadata:
   name: arklb
   labels:
-    helm.sh/chart: arklb-0.1.9
+    helm.sh/chart: arklb-0.1.11
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "v0.1.9"
+    app.kubernetes.io/version: "v0.1.10"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -56,14 +56,14 @@ spec:
         app.kubernetes.io/name: arklb
         app.kubernetes.io/instance: arklb
     spec:
-      serviceAccountName: ark
+      serviceAccountName: arklb
       securityContext:
         {}
       containers:
         - name: arklb
           securityContext:
             privileged: true
-          image: "aerox86/arklb:v0.1.9"
+          image: "aerox86/arklb:v0.1.10"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -86,10 +86,10 @@ kind: Pod
 metadata:
   name: "arklb-test-connection"
   labels:
-    helm.sh/chart: arklb-0.1.9
+    helm.sh/chart: arklb-0.1.11
     app.kubernetes.io/name: arklb
     app.kubernetes.io/instance: arklb
-    app.kubernetes.io/version: "v0.1.9"
+    app.kubernetes.io/version: "v0.1.10"
     app.kubernetes.io/managed-by: Helm
   annotations:
     "helm.sh/hook": test
