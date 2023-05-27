@@ -1,7 +1,0 @@
----
-name: cnf testsuite
-testsuite_version: <%= CnfTestSuite::VERSION %>
-status:
-points:
-exit_code: 0
-items: []
