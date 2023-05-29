@@ -3,7 +3,7 @@ name: cnf testsuite
 testsuite_version: v0.42.2
 status:
 command: /home/gitpod/.cnf-testsuite/cnf-testsuite workload cnf-config=./cnf-testsuite.yml
-points: 891
+points: 871
 exit_code: 2
 items:
 - name: helm_chart_valid
